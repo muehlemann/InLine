@@ -1,0 +1,1 @@
+../../../IFGCircularSlider/IFGCircularSlider/IFGCircularTrig.h
