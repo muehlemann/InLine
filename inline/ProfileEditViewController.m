@@ -151,6 +151,7 @@
                              @"password_new" : txt_password_2.text,
                              @"email" : txt_email.text};
 
+    // Update a profiles information
     AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc]initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
     [manager setRequestSerializer:[AFJSONRequestSerializer serializer]];
     [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];

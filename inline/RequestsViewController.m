@@ -78,6 +78,7 @@
     NSDictionary *user = [[NSUserDefaults standardUserDefaults] objectForKey:@"user"];
     NSString *query = [NSString stringWithFormat:@"users/%@/followers/pending", [user objectForKey:@"_id"]];
     
+    // Make a server request to get the pending
     AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc]initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
     [manager setRequestSerializer:[AFJSONRequestSerializer serializer]];
     [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -157,6 +158,7 @@
  */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    // Init custom cell class
     static NSString *identifier = @"identifier";
     RequestCell *cell = (RequestCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
     
@@ -219,6 +221,7 @@
     NSString *query = [NSString stringWithFormat:@"users/%@/followers/request", [user objectForKey:@"_id"]];
     NSDictionary *params = @{@"follower_id" : cell.follower_id};
     
+    // Make a server request to delete a request
     AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc]initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
     [manager setRequestSerializer:[AFJSONRequestSerializer serializer]];
     [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -349,6 +352,7 @@
     NSString *query = [NSString stringWithFormat:@"users/%@/followers/request", [user objectForKey:@"_id"]];
     NSDictionary *params = @{@"follower_id" : userId, @"branches" : arr};
     
+    // Make a server request to accept a follower request
     AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc]initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
     [manager setRequestSerializer:[AFJSONRequestSerializer serializer]];
     [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -401,6 +405,7 @@
     NSString *query = [NSString stringWithFormat:@"users/%@/followers/request", [user objectForKey:@"_id"]];
     NSDictionary *params = @{@"follower_id" : userId};
     
+    // Make a server request for a follower request
     AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc]initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
     [manager setRequestSerializer:[AFJSONRequestSerializer serializer]];
     [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];

@@ -166,16 +166,19 @@
  */
 - (void)captureOutput:(AVCapturePhotoOutput *)captureOutput didFinishProcessingPhotoSampleBuffer:(CMSampleBufferRef)photoSampleBuffer previewPhotoSampleBuffer:(CMSampleBufferRef)previewPhotoSampleBuffer resolvedSettings:(AVCaptureResolvedPhotoSettings *)resolvedSettings bracketSettings:(AVCaptureBracketedStillImageSettings *)bracketSettings error:(NSError *)error
 {
+    // Capture the output and convert into data from stream.
+    // Take that data and covert into image
     NSData *imgData = [AVCapturePhotoOutput JPEGPhotoDataRepresentationForJPEGSampleBuffer:photoSampleBuffer previewPhotoSampleBuffer:previewPhotoSampleBuffer];
     UIImage *img = [UIImage imageWithData:imgData];
     
+    // Adjust image if its a selfie.
     if ([videoDevice position] == AVCaptureDevicePositionFront) {
         img = [UIImage imageWithCGImage:[img CGImage]
                                   scale:[img scale]
                             orientation:UIImageOrientationLeftMirrored];
     }
 
-    
+    // Send notification for image taken.
     [[NSNotificationCenter defaultCenter] postNotificationName:@"photo_taken" object:img];
 }
 

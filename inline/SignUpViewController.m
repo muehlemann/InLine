@@ -116,7 +116,7 @@
 }
 
 /**
- * Signsup the user
+ * Signs up the user
  *
  */
 - (void)signup
@@ -138,6 +138,7 @@
         token = @"";
     }
     
+    // Check if all information is provided
     if ([handle isEqualToString:@""] || [email isEqualToString:@""] || [password isEqualToString:@""])
     {
         // Show Error TOAST
@@ -161,6 +162,7 @@
                                  @"password" : password,
                                  @"token"    : token};
         
+        // Make server request to register a user
         AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc]initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
         [manager setRequestSerializer:[AFJSONRequestSerializer serializer]];
         [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -225,7 +227,7 @@
 }
 
 /**
- * Present sign in
+ * Present sign in view
  *
  */
 - (void)signin

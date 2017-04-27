@@ -159,7 +159,7 @@
 }
 
 /**
- * Curved slider
+ * Curved slider to scrub all posts
  *
  * @p sender
  */
@@ -292,6 +292,7 @@
     NSUserDefaults *user = [[NSUserDefaults standardUserDefaults] objectForKey:@"user"];
     NSString *query = [NSString stringWithFormat:@"timeline/%@", [user objectForKey:@"_id"]];
     
+    // Make a server request to get timeline
     AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
     [manager setRequestSerializer:[AFJSONRequestSerializer serializer]];
     [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];

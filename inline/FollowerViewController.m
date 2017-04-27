@@ -296,6 +296,7 @@
  */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    // Init custom cell class
     static NSString *identifier = @"identifier";
     SearchCell *cell = (SearchCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
     
@@ -308,6 +309,7 @@
 
     NSLog(@"%@", results[indexPath.row]);
     
+    // Populate the cell unless there are no user found
     if ([[results[indexPath.row] objectForKey:@"handle"] isEqualToString:@"no user found"])
     {
         [cell.handle setTextAlignment:NSTextAlignmentCenter];
@@ -368,6 +370,7 @@
     NSString *query = [NSString stringWithFormat:@"users/%@/followers/request", [user objectForKey:@"_id"]];
     NSDictionary *params = @{@"follower_id" : [results[b.tag] objectForKey:@"_id"]};
     
+    // Make a server request to follow
     AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc]initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
     [manager setRequestSerializer:[AFJSONRequestSerializer serializer]];
     [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -417,11 +420,12 @@
     NSLog(@"%ld", (long)[b tag]);
     NSLog(@"%@", [results[b.tag] objectForKey:@"_id"]);
     
-    // Makes a follower request
+    // Makes a un-follow request
     NSDictionary *user = [[NSUserDefaults standardUserDefaults] objectForKey:@"user"];
     NSString *query = [NSString stringWithFormat:@"users/%@/followers/delete", [user objectForKey:@"_id"]];
     NSDictionary *params = @{@"follower_id" : [results[b.tag] objectForKey:@"_id"]};
     
+    // Makes a server request to un-follow
     AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc]initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
     [manager setRequestSerializer:[AFJSONRequestSerializer serializer]];
     [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];

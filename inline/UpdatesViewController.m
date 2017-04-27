@@ -182,16 +182,8 @@
     NSDateFormatter *format = [[NSDateFormatter alloc] init];
     [format setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
     [format setDateFormat:@"MMM dd, YYYY hh:mma"];
-
-//    static NSString *identifier = @"identifier";
-//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-//    
-//    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-//    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-//    [cell setBackgroundColor:[UIColor clearColor]];
-//    [cell setSeparatorInset:UIEdgeInsetsZero];
-//    [cell setLayoutMargins:UIEdgeInsetsZero];
     
+    // Init custom cell class
     static NSString *identifier = @"identifier";
     TimelineCell *cell = (TimelineCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
     
@@ -201,26 +193,6 @@
     [cell.img setImageWithURL:[NSURL URLWithString:[post objectForKey:@"url"]]];
     [cell.handle setText:[NSString stringWithFormat:@"@%@", user]];
     [cell.date setText:[format stringFromDate:date]];
-    
-//    UIImageView *img = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, _VW - 20, 60)];
-//    [img setImageWithURL:[NSURL URLWithString:[post objectForKey:@"url"]]];
-//    [img setContentMode:UIViewContentModeScaleAspectFill];
-//    [img.layer setMasksToBounds:YES];
-//    [img.layer setCornerRadius:3];
-//    [cell addSubview:img];
-//
-//    UILabel *lblUser = [[UILabel alloc] initWithFrame:CGRectMake(5, 40, _VW - 30, 20)];
-//    [lblUser setFont:[UIFont boldSystemFontOfSize:12]];
-//    [lblUser setText:[NSString stringWithFormat:@"@%@", user]];
-//    [lblUser setTextColor:[UIColor whiteColor]];
-//    [img addSubview:lblUser];
-//    
-//    UILabel *lblDate = [[UILabel alloc] initWithFrame:CGRectMake(5, 40, _VW - 30, 20)];
-//    [lblDate setFont:[UIFont boldSystemFontOfSize:12]];
-//    [lblDate setText:[format stringFromDate:date]];
-//    [lblDate setTextColor:[UIColor whiteColor]];
-//    [lblDate setTextAlignment:NSTextAlignmentRight];
-//    [img addSubview:lblDate];
     
     return cell;
 }

@@ -38,6 +38,10 @@
     [self.view addSubview:btn_done];
 }
 
+/**
+ * Dismisses the view
+ *
+ */
 - (void)dismiss
 {
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -57,6 +61,7 @@
     NSUserDefaults *user = [[NSUserDefaults standardUserDefaults] objectForKey:@"user"];
     NSString *query = [NSString stringWithFormat:@"timeline/%@/statistics", [user objectForKey:@"_id"]];
     
+    // Makes a server request for users posting statistics
     AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
     [manager setRequestSerializer:[AFJSONRequestSerializer serializer]];
     [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -106,8 +111,9 @@
  */
 - (void)userClickedOnPieIndexItem:(NSInteger)pieIndex
 {
+    // Changes a lable based on selected pie-chart slice
     for (int i = 0; i < [_C_BRANCHES count]; i++) {
-     
+    
         PNPieChartDataItem *slice = pie.items[pieIndex];
         if ([slice.color isEqual:_C_BRANCHES[i]]) {
             [lbl setText:_BRANCHES[i + 1]];
@@ -124,10 +130,12 @@
  */
 - (NSDictionary *)getPieValues:(NSDictionary *)dict
 {
+    // Object to hold all piechart values
     NSMutableDictionary *d = [[NSMutableDictionary alloc] init];
-    
+
     for (NSString *key in dict)
     {
+        // Choses appropriate color for pie slice type
         if ([dict objectForKey:key])
         {
             UIColor *col;
@@ -145,6 +153,7 @@
             else if ([key isEqualToString:@"spirit"])
                 col = _C_BRANCHES[5];
             
+            // Build pie slice
             PNPieChartDataItem *item = [PNPieChartDataItem dataItemWithValue:[[dict objectForKey:key] floatValue] color:col];
             [d setObject:item forKey:key];
         }

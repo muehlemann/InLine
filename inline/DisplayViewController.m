@@ -227,6 +227,7 @@
     NSDictionary *user = [[NSUserDefaults standardUserDefaults] objectForKey:@"user"];
     NSDictionary *params = @{@"user_id" : [user objectForKey:@"_id"]};
     
+    // Make a server request to like a post
     AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc]initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
     [manager setRequestSerializer:[AFJSONRequestSerializer serializer]];
     [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];

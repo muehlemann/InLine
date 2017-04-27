@@ -15,7 +15,7 @@
 /**
  * The initializer function of a custom tableview cell
  *
- * @p style           The stile of the tableview cell
+ * @p style           The style of the tableview cell
  * @p reuseIdentifier The reuse identifier of the tableview cell
  */
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier

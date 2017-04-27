@@ -60,6 +60,7 @@
         [img1 setImage:[UIImage imageNamed:@"intro_app"]];
         [header1 addSubview:img1];
         
+        // Make a tutorial panel
         MYIntroductionPanel *panel1 = [[MYIntroductionPanel alloc] initWithFrame:CGRectMake(0, 0, _VW, _VH)
                                                                            title:@"Welcome to InLine"
                                                                      description:@"InLine is a social network focused on user privacy that allows you to categorize the different relationships in your life.\n\nThis thesis project, developed by Matt Muehlemann, aims to fill the void of a social media platform that respects the users privacy and presents the user with a nonintrusive experience."
@@ -72,6 +73,7 @@
         [img2 setImage:[UIImage imageNamed:@"intro_search"]];
         [header2 addSubview:img2];
         
+        // Make a tutorial panel
         MYIntroductionPanel *panel2 = [[MYIntroductionPanel alloc] initWithFrame:CGRectMake(0, 0, _VW, _VH)
                                                                            title:@"Making Friends"
                                                                      description:@"In the connection tab, connect with other users on InLine and categorize them using branches.\n\nBranches are what makes InLine unique; by categorizing your social relationships you gain a better control of who can and cannot see the content you post."
@@ -84,6 +86,7 @@
         [img3 setImage:[UIImage imageNamed:@"intro_updates"]];
         [header3 addSubview:img3];
         
+        // Make a tutorial panel
         MYIntroductionPanel *panel3 = [[MYIntroductionPanel alloc] initWithFrame:CGRectMake(0, 0, _VW, _VH)
                                                                            title:@"What's Everyone Up To?"
                                                                      description:@"In the updates tab, see your friends latest updates.\n\nOnce you have chosen to view someones updates you can navigate their posts with ease. Tap right and left, to go forwards and backwards. Swipe up to like and swipe down to dismiss the timeline."
@@ -96,6 +99,7 @@
         [img4 setImage:[UIImage imageNamed:@"intro_profile"]];
         [header4 addSubview:img4];
         
+        // Make a tutorial panel
         MYIntroductionPanel *panel4 = [[MYIntroductionPanel alloc] initWithFrame:CGRectMake(0, 0, _VW, _VH)
                                                                            title:@"All About You!"
                                                                      description:@"In the profile tab, you can view your personal timeline, make posts, view statistics, and update your account information.\n\nEnjoy!"
@@ -105,18 +109,12 @@
         MYBlurIntroductionView *introductionView = [[MYBlurIntroductionView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
         [introductionView buildIntroductionWithPanels:@[panel1, panel2, panel3, panel4]];
         [introductionView setBackgroundColor:_C_BLUE];
-//        [introductionView setDelegate:self];
         [self.view addSubview:introductionView];
     }
 }
 
-+ (void)showTutorial
-{
-    NSLog(@"hi");
-}
-
 /**
- * Indicates when an imte is selected
+ * Indicates when an item is selected
  *
  * @p tabBar
  * @p item
@@ -136,11 +134,13 @@
     NSDictionary *user = [[NSUserDefaults standardUserDefaults] objectForKey:@"user"];
     NSString *query = [NSString stringWithFormat:@"users/%@/followers/pending", [user objectForKey:@"_id"]];
     
+    // Make server request to get all pending requests
     AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc]initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
     [manager setRequestSerializer:[AFJSONRequestSerializer serializer]];
     [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [manager GET:_API(query) parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
     {
+        // If there are pending requests, add a badge to the tabbar item
         int count = (int)[(NSArray *)responseObject count];
         if (count == 0)
             [[[self.tabBar items] objectAtIndex:0] setBadgeValue:nil];

@@ -132,6 +132,7 @@
                                  @"password": password,
                                  @"token": token};
         
+        // Make server request to sign in a user
         AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc]initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
         [manager setRequestSerializer:[AFJSONRequestSerializer serializer]];
         [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
